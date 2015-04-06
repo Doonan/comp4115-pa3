@@ -1,0 +1,161 @@
+-- PART 1 --
+NOTE: I cannot call the function "exp" because that function already exists.
+
+mysql> create function exp2(a int, b int) returns int return(a*b);
+mysql> select exp2(2,3);
++-----------+
+| exp2(2,3) |
++-----------+
+|         6 |
++-----------+
+
+-- PART 2 --
+NOTE: I named my functions "my_area_udf" and "my_sec_udf" respectively.
+
+~my_area_udf~
+
+mysql> select my_area_udf(2);
++----------------+
+| my_area_udf(2) |
++----------------+
+|         12.566 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select my_area_udf(3);
++----------------+
+| my_area_udf(3) |
++----------------+
+|         28.274 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select my_area_udf(30.4);
++-------------------+
+| my_area_udf(30.4) |
++-------------------+
+|          2903.334 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select my_area_udf(10.456);
++---------------------+
+| my_area_udf(10.456) |
++---------------------+
+|             343.464 |
++---------------------+
+1 row in set (0.00 sec)
+
+~my_sec_udf~
+
+mysql> select my_sec_udf(61);
++------------------+
+| my_sec_udf(61)   |
++------------------+
+| h: 0, m: 1, s: 1 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select my_sec_udf(3601);
++------------------+
+| my_sec_udf(3601) |
++------------------+
+| h: 1, m: 0, s: 1 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select my_sec_udf(7201);
++------------------+
+| my_sec_udf(7201) |
++------------------+
+| h: 2, m: 0, s: 1 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select my_sec_udf(7801);
++-------------------+
+| my_sec_udf(7801)  |
++-------------------+
+| h: 2, m: 10, s: 1 |
++-------------------+
+1 row in set (0.00 sec)
+
+-- PART 3 --
+mysql> source my_stored_proc.sql;
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call fullname("Bouloucos");
++---------------+-----------+
+| first_name    | last_name |
++---------------+-----------+
+| Cristinel     | Bouloucos |
+| Vishv         | Bouloucos |
+| Kazuhide      | Bouloucos |
+.............................
+| Percy         | Bouloucos |
+| Goetz         | Bouloucos |
+| Horward       | Bouloucos |
++---------------+-----------+
+195 rows in set (0.11 sec)
+
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> call fullname("Goetz");
++------------+---------------+
+| first_name | last_name     |
++------------+---------------+
+| Goetz      | Norsworthy    |
+| Goetz      | Hiyoshi       |
+| Goetz      | Basart        |
+..............................
+| Goetz      | Bottner       |
+| Goetz      | Swen          |
+| Goetz      | Vakili        |
++------------+---------------+
+242 rows in set (0.11 sec)
+
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> call avgsalary("d009");
++----------------------+
+| sum(salary)/count(*) |
++----------------------+
+|           58770.3665 |
++----------------------+
+1 row in set (6.37 sec)
+
+Query OK, 0 rows affected (6.37 sec)
+
+mysql> call avgsalary("d007");
++----------------------+
+| sum(salary)/count(*) |
++----------------------+
+|           80667.6058 |
++----------------------+
+1 row in set (5.79 sec)
+
+Query OK, 0 rows affected (5.79 sec)
+
+mysql> call sexlist('M');
++----------+
+| count(*) |
++----------+
+|   179973 |
++----------+
+1 row in set (0.09 sec)
+
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> call sexlist('F');
++----------+
+| count(*) |
++----------+
+|   120051 |
++----------+
+1 row in set (0.08 sec)
+
+Query OK, 0 rows affected (0.08 sec)
